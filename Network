@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 19 09:18:03 2020
+
+@author: user
+"""
+def fit(self):
+       
+        n_input = (self.input_data_trainX).shape[1]
+        n_output = (self.input_data_trainY).shape[1]
+        X = tf.placeholder('float',[None,n_input],name = 'X')
+        Y = tf.placeholder('float',[None,n_output],name = 'Y')
+        
+        c = tf.Variable(tf.random_normal([self.hidden_nodes,n_input]),name = 'c')
+        delta = tf.Variable(tf.random_normal([1,self.hidden_nodes]),name = 'delta')
+        
+        W = tf.Variable(tf.random_normal([self.hidden_nodes,n_output]),name = 'W')
+        b = tf.Variable(tf.random_normal([1,n_output]),name = 'b')
+        
+        dist = tf.reduce_sum(tf.square(tf.subtract(tf.tile(X,[self.hidden_nodes,1]),c)),1)  
+        dist = tf.multiply(1.0,tf.transpose(dist))
+       
+        delta_2 = tf.square(delta)
+       
+        RBF_OUT = tf.exp(tf.multiply(-1.0,tf.divide(dist,tf.multiply(2.0,delta_2))))           
+        
+        output_in = tf.matmul(RBF_OUT,W) + b
+        
+        y_pred = tf.nn.sigmoid(output_in)
+        
+        cost = tf.reduce_mean(tf.pow(Y - y_pred,2)) 
+        train_op = tf.train.GradientDescentOptimizer(0.05).minimize(cost) 
+        
+       
+        trX = self.input_data_trainX
+        trY = self.input_data_trainY
+        
+        with tf.Session() as sess:
+            
+            tf.global_variables_initializer().run()
+            for epoch in range(100):
+                for i in range(len(trX)):
+                    feed = {X:trX[i],Y:trY[i]}
+                    sess.run(train_op,feed_dict = feed)
+                if epoch % 10.0 == 0:
+                    total_loss = 0.0
+                    for j in range(len(trX)):
+                        total_loss += sess.run(cost,feed_dict = {X:trX[j],Y:trY[j]})
+                    print('Loss function at step %d is %s'%(epoch,total_loss / len(trX)))
+            print('Training complete!')
+
+            W = W.eval()
+            b = b.eval()
+            c = c.eval()
+            delta = delta.eval()
+            pred_trX = np.mat(np.zeros((len(trX),n_output)))
+            
+            correct_tr = 0.0
+            for i in range(len(trX)):
+                pred_tr = sess.run(y_pred,feed_dict = {X:trX[i]})
+                pred_trX[i,:] = pred_tr
+                if np.argmax(pred_tr,1) == np.argmax(trY[i],1):
+                    correct_tr += 1.0
+            print('Accuracy on train set is :%s'%(correct_tr/len(trX)))
+            self.save_model('RBF_predict_results.txt',pred_trX)
