@@ -70,7 +70,7 @@ if __name__ == "__main__":
 Created on Wed Oct 21 10:00:54 2020
 
 @author: user
-"""
+
 # encoding: UTF-8
 import glob as gb
 import cv2
@@ -85,7 +85,7 @@ for path in img_path:
     videoWriter.write(img)
     cv2.waitKey(100)
     
-"""    
+ 
 import cv2
 import os
 
@@ -137,7 +137,7 @@ if __name__ == "__main__":
 Created on Wed Oct 21 10:00:54 2020
 
 @author: user
-"""
+
 # encoding: UTF-8
 import glob as gb
 import cv2
