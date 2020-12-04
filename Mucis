@@ -1,0 +1,174 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 19 09:18:03 2020
+
+@author: user
+"""
+
+from numpy.random import seed
+seed(1)
+from tensorflow import set_random_seed
+set_random_seed(2)
+#處理MIDI檔案
+from music21 import * 
+
+#陣列處理
+import numpy as np     
+import os
+
+#隨機數生成
+import random         
+
+#keras構建深度學習模型
+from keras.layers import * 
+from keras.models import *
+import keras.backend as K
+
+def read_midi(file):
+  notes=[]
+  notes_to_parse = None
+
+  #解析MIDI檔案
+  midi = converter.parse(file)
+  #基於樂器分組
+  s2 = instrument.partitionByInstrument(midi)
+
+  #遍歷所有的樂器
+  for part in s2.parts:
+    #只選擇鋼琴
+    if 'Piano' in str(part): 
+      notes_to_parse = part.recurse() 
+      #查詢特定元素是音符還是和絃
+      for element in notes_to_parse:
+        if isinstance(element, note.Note):
+          notes.append(str(element.pitch))
+        elif isinstance(element, chord.Chord):
+          notes.append('.'.join(str(n) for n in element.normalOrder))
+
+  return notes
+
+#讀取所有檔名
+files=[i for i in os.listdir() if i.endswith(".mid")]
+
+#讀取每個midi檔案
+all_notes=[]
+for i in files:
+  all_notes.append(read_midi(i))
+
+#所有midi檔案的音符和和絃
+notes = [element for notes in all_notes for element in notes]
+
+#輸入序列的長度
+no_of_timesteps = 128      
+
+n_vocab = len(set(notes))  
+pitch = sorted(set(item for item in notes))  
+
+#為每個note分配唯一的值
+note_to_int = dict((note, number) for number, note in enumerate(pitch))  
+#準備輸入和輸出序列
+X = []
+y = []
+for notes in all_notes:
+  for i in range(0, len(notes) - no_of_timesteps, 1):
+    input_ = notes[i:i + no_of_timesteps]
+    output = notes[i + no_of_timesteps]
+    X.append([note_to_int[note] for note in input_])
+    y.append(note_to_int[output])
+
+X = np.reshape(X, (len(X), no_of_timesteps, 1))
+#標準化輸入
+X = X / float(n_vocab)
+
+def lstm():
+  model = Sequential()
+  model.add(LSTM(128,return_sequences=True))
+  model.add(LSTM(128))
+  model.add(Dense(256))
+  model.add(Activation('relu'))
+  model.add(Dense(n_vocab))
+  model.add(Activation('softmax'))
+  model.compile(loss='sparse_categorical_crossentropy', optimizer='adam')
+  return model
+
+K.clear_session()
+def simple_wavenet():
+  no_of_kernels=64
+  num_of_blocks= int(np.sqrt(no_of_timesteps)) - 1 
+
+  model = Sequential()
+  for i in range(num_of_blocks):
+    model.add(Conv1D(no_of_kernels,3,dilation_rate=(2**i),padding='causal',activation='relu'))
+  model.add(Conv1D(1, 1, activation='relu', padding='causal'))
+  model.add(Flatten())
+  model.add(Dense(128, activation='relu'))
+  model.add(Dense(n_vocab, activation='softmax'))
+  model.compile(loss='sparse_categorical_crossentropy', optimizer='adam')
+  return model
+
+import keras
+mc = keras.callbacks.ModelCheckpoint('model{epoch:03d}.h5', save_weights_only=False, period=50)
+
+model = simple_wavenet()
+model.fit(X,np.array(y), epochs=300, batch_size=128,callbacks=[mc])
+
+def generate_music(model, pitch, no_of_timesteps, pattern):
+
+    int_to_note = dict((number, note) for number, note in enumerate(pitch))
+    prediction_output = []
+
+    # 生成50個
+    for note_index in range(50):
+        #輸入資料
+        input_ = np.reshape(pattern, (1, len(pattern), 1))
+        #預測並選出最大可能的元素
+        proba = model.predict(input_, verbose=0)
+        index = np.argmax(proba)
+
+        pred = int_to_note[index]
+        prediction_output.append(pred)
+        pattern = list(pattern)
+        pattern.append(index/float(n_vocab))
+        #將第一個值保留在索引0處
+        pattern = pattern[1:len(pattern)]
+
+    return prediction_output
+
+def convert_to_midi(prediction_output):
+    offset = 0
+    output_notes = []
+
+    # 根據模型生成的值建立音符和和絃物件
+    for pattern in prediction_output:
+        # 模式是和絃
+        if ('.' in pattern) or pattern.isdigit():
+            notes_in_chord = pattern.split('.')
+            notes = []
+            for current_note in notes_in_chord:
+                new_note = note.Note(int(current_note))
+                new_note.storedInstrument = instrument.Piano()
+                notes.append(new_note)
+            new_chord = chord.Chord(notes)
+            new_chord.offset = offset
+            output_notes.append(new_chord)
+        # 模式是音符
+        else:
+            new_note = note.Note(pattern)
+            new_note.offset = offset
+            new_note.storedInstrument = instrument.Piano()
+            output_notes.append(new_note)
+
+        # 指定兩個音符之間的持續時間
+        offset += 0.5
+       # offset += random.uniform(0.5,0.9)
+
+    midi_stream = stream.Stream(output_notes)
+    midi_stream.write('midi', fp='music.mid')
+    #為第一次迭代選擇隨機塊
+start = np.random.randint(0, len(X)-1)
+pattern = X[start]
+#載入最好的模型
+model=load_model('model300.h5')
+#生成和儲存音樂
+music = generate_music(model,pitch,no_of_timesteps,pattern)
+convert_to_midi(music)
