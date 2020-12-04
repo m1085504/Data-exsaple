@@ -1,0 +1,147 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 21 10:00:54 2020
+
+@author: user
+"""
+# encoding: UTF-8
+import glob as gb
+import cv2
+
+#img_path = gb.glob("C:/Users/user/Desktop/img/*.jpg") 
+img_path = gb.glob("C:/Users/user/Desktop/VOC2012/JPEGImages/*.jpg") 
+videoWriter = cv2.VideoWriter('test.mp4', cv2.VideoWriter_fourcc(*'MJPG'), 25, (640,480))
+
+for path in img_path:
+    img  = cv2.imread(path) 
+    img = cv2.resize(img,(640,480))
+    videoWriter.write(img)
+    cv2.waitKey(100)
+    
+"""    
+import cv2
+import os
+
+fps = 10
+size = (1280, 720)
+videowriter = cv2.VideoWriter("test.mp4", cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), fps, size)
+path = 'C:/Users/user/Desktop/VOC2012/JPEGImages'
+for i in os.listdir(path):
+    img = cv2.imread(path + i)
+    videowriter.write(img)
+
+
+import cv2
+import os
+
+
+def pic_to_video(pic_list, video_name, fps, pic_size):
+    
+    图片合成视频
+    :param pic_list: 图片路径列表
+    :param video_name: 生成视频的名字
+    :param fps: 1s显示多少张图片
+    :param pic_size: 图片尺寸
+    :return:
+   
+    # 'mp4v' 生成mp4格式的视频
+    # 'DIVX' 生成avi格式的视频
+    if "mp4" in video_name:
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), fps, pic_size)
+    elif ".avi" in video_name:
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'DIVX'), fps, pic_size)
+    else:
+        print("格式错误")
+        return
+
+    for filename in pic_list:
+        if os.path.exists(filename):
+            video.write(cv2.imread(filename))
+    video.release()
+
+
+if __name__ == "__main__":
+    pic_to_video(["C:/Users/user/Desktop/img/1.jpg", "C:/Users/user/Desktop/img/2.jpg", "C:/Users/user/Desktop/img/3.jpg"], "test.avi", 1, (640, 600))
+    pic_to_video(["C:/Users/user/Desktop/img/1.jpg", "C:/Users/user/Desktop/img/2.jpg", "C:/Users/user/Desktop/img/3.jpg"], "test.mp4", 1, (1600, 600))
+    
+"""
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 21 10:00:54 2020
+
+@author: user
+"""
+# encoding: UTF-8
+import glob as gb
+import cv2
+
+#img_path = gb.glob("C:/Users/user/Desktop/img/*.jpg") 
+img_path = gb.glob("C:/Users/user/Desktop/VOC2012/JPEGImages/*.jpg") 
+videoWriter = cv2.VideoWriter('test.mp4', cv2.VideoWriter_fourcc(*'MJPG'), 25, (640,480))
+
+for path in img_path:
+    img  = cv2.imread(path) 
+    img = cv2.resize(img,(640,480))
+    videoWriter.write(img)
+    cv2.waitKey(100)
+    
+"""    
+import cv2
+import os
+
+fps = 10
+size = (1280, 720)
+videowriter = cv2.VideoWriter("test.mp4", cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), fps, size)
+path = 'C:/Users/user/Desktop/VOC2012/JPEGImages'
+for i in os.listdir(path):
+    img = cv2.imread(path + i)
+    videowriter.write(img)
+
+
+import cv2
+import os
+
+
+def pic_to_video(pic_list, video_name, fps, pic_size):
+    
+    图片合成视频
+    :param pic_list: 图片路径列表
+    :param video_name: 生成视频的名字
+    :param fps: 1s显示多少张图片
+    :param pic_size: 图片尺寸
+    :return:
+   
+    # 'mp4v' 生成mp4格式的视频
+    # 'DIVX' 生成avi格式的视频
+    if "mp4" in video_name:
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), fps, pic_size)
+    elif ".avi" in video_name:
+        video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'DIVX'), fps, pic_size)
+    else:
+        print("格式错误")
+        return
+
+    for filename in pic_list:
+        if os.path.exists(filename):
+            video.write(cv2.imread(filename))
+    video.release()
+
+
+if __name__ == "__main__":
+    pic_to_video(["C:/Users/user/Desktop/img/1.jpg", "C:/Users/user/Desktop/img/2.jpg", "C:/Users/user/Desktop/img/3.jpg"], "test.avi", 1, (640, 600))
+    pic_to_video(["C:/Users/user/Desktop/img/1.jpg", "C:/Users/user/Desktop/img/2.jpg", "C:/Users/user/Desktop/img/3.jpg"], "test.mp4", 1, (1600, 600))
+    
+"""
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 21 10:00:54 2020
+
+@author: user
+"""
+# encoding: UTF-8
+import glob as gb
+import cv2
+
+#img_path = gb.glob("C:/Users/user/Desktop/img/*.jpg") 
+img_path = gb.glob("C:/Users/user/Desktop/VOC2012/JPEGImages/*.jpg") 
+videoWriter = cv2.VideoWriter('test.mp4', cv2.VideoWriter_fourcc(*'MJPG'), 25, (640,480))
