@@ -63,3 +63,90 @@ def fit(self):
                     correct_tr += 1.0
             print('Accuracy on train set is :%s'%(correct_tr/len(trX)))
             self.save_model('RBF_predict_results.txt',pred_trX)
+
+def fitr(selrf):
+       
+        n_input = (self.input_data_trainX).shape[1]
+        n_output = (self.input_data_trainY).shape[1]
+        X = tf.placeholder('float',[None,n_input],name = 'X')
+        Y = tf.placeholder('float',[None,n_output],name = 'Y')
+        
+        c = tf.Variable(tf.random_normal([self.hidden_nodes,n_input]),name = 'c')
+        delta = tf.Variable(tf.random_normal([1,self.hidden_nodes]),name = 'delta')
+        
+        W = tf.Variable(tf.random_normal([self.hidden_nodes,n_output]),name = 'W')
+        b = tf.Variable(tf.random_normal([1,n_output]),name = 'b')
+        
+        dist = tf.reduce_sum(tf.square(tf.subtract(tf.tile(X,[self.hidden_nodes,1]),c)),1)  
+        dist = tf.multiply(1.0,tf.transpose(dist))
+       
+        delta_2 = tf.square(delta)
+       
+        RBF_OUT = tf.exp(tf.multiply(-1.0,tf.divide(dist,tf.multiply(2.0,delta_2))))           
+        
+        output_in = tf.matmul(RBF_OUT,W) + b
+        
+        y_pred = tf.nn.sigmoid(output_in)
+        
+        cost = tf.reduce_mean(tf.pow(Y - y_pred,2)) 
+        train_op = tf.train.GradientDescentOptimizer(0.05).minimize(cost) 
+        
+       
+        trX = self.input_data_trainX
+        trY = self.input_data_trainY
+       
+        n_input = (self.input_data_trainX).shape[1]
+        n_output = (self.input_data_trainY).shape[1]
+        X = tf.placeholder('float',[None,n_input],name = 'X')
+        Y = tf.placeholder('float',[None,n_output],name = 'Y')
+        
+        c = tf.Variable(tf.random_normal([self.hidden_nodes,n_input]),name = 'c')
+        delta = tf.Variable(tf.random_normal([1,self.hidden_nodes]),name = 'delta')
+        
+        W = tf.Variable(tf.random_normal([self.hidden_nodes,n_output]),name = 'W')
+        b = tf.Variable(tf.random_normal([1,n_output]),name = 'b')
+        
+        dist = tf.reduce_sum(tf.square(tf.subtract(tf.tile(X,[self.hidden_nodes,1]),c)),1)  
+        dist = tf.multiply(1.0,tf.transpose(dist))
+       
+        delta_2 = tf.square(delta)
+       
+        RBF_OUT = tf.exp(tf.multiply(-1.0,tf.divide(dist,tf.multiply(2.0,delta_2))))           
+        
+        output_in = tf.matmul(RBF_OUT,W) + b
+        
+        y_pred = tf.nn.sigmoid(output_in)
+        
+        cost = tf.reduce_mean(tf.pow(Y - y_pred,2)) 
+        train_op = tf.train.GradientDescentOptimizer(0.05).minimize(cost) 
+        
+       
+        trX = self.input_data_trainX
+        trY = self.input_data_trainYdef fit(self):
+       
+        n_input = (self.input_data_trainX).shape[1]
+        n_output = (self.input_data_trainY).shape[1]
+        X = tf.placeholder('float',[None,n_input],name = 'X')
+        Y = tf.placeholder('float',[None,n_output],name = 'Y')
+        
+        c = tf.Variable(tf.random_normal([self.hidden_nodes,n_input]),name = 'c')
+        delta = tf.Variable(tf.random_normal([1,self.hidden_nodes]),name = 'delta')
+        
+        W = tf.Variable(tf.random_normal([self.hidden_nodes,n_output]),name = 'W')
+        b = tf.Variable(tf.random_normal([1,n_output]),name = 'b')
+        
+        dist = tf.reduce_sum(tf.square(tf.subtract(tf.tile(X,[self.hidden_nodes,1]),c)),1)  
+        dist = tf.multiply(1.0,tf.transpose(dist))
+       
+        delta_2 = tf.square(delta)
+       
+        RBF_OUT = tf.exp(tf.multiply(-1.0,tf.divide(dist,tf.multiply(2.0,delta_2))))           
+        
+        output_in = tf.matmul(RBF_OUT,W) + b
+        
+        y_pred = tf.nn.sigmoid(output_in)
+        
+        cost = tf.reduce_mean(tf.pow(Y - y_pred,2)) 
+        train_op = tf.train.GradientDescentOptimizer(0.05).minimize(cost) 
+        trX = self.input_data_trainX
+        trY = self.input_data_trainY
