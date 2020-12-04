@@ -63,7 +63,7 @@ def fit(self):
                     correct_tr += 1.0
             print('Accuracy on train set is :%s'%(correct_tr/len(trX)))
             self.save_model('RBF_predict_results.txt',pred_trX)
-
+"""
 def fitr(selrf):
        
         n_input = (self.input_data_trainX).shape[1]
