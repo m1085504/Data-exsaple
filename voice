@@ -1,0 +1,20 @@
+from aip import AipSpeech
+from pydub import AudioSegment
+import time
+
+#input your own APP_ID/API_KEY/SECRET_KEY
+APP_ID = '14891501' 
+API_KEY = 'EIm2iXtvDSplvR5cyHU8dAeM' 
+SECRET_KEY = '4KkGGzTq2GVrBEYPLXXWEEIoyLL1F6Zt ' 
+
+print("baiduVoiceGenerate: V1.0, by Guanagwei_Jiang, 20181121")
+str = raw_input("請輸入要轉成語音的文字： ")
+client = AipSpeech(APP_ID, API_KEY, SECRET_KEY) 
+result = client.synthesis(str, 'zh', 1, { 'vol': 5,'per':4 }) 
+
+if not isinstance(result, dict): 
+    with open('temp.mp3', 'wb') as f: 
+        f.write(result)
+
+sound = AudioSegment.from_mp3('temp.mp3')
+sound.export(time.strftime("%Y%m%d_%H%M%S", time.localtime())+".wav", format="wav")
