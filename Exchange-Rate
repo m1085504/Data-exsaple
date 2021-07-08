@@ -1,0 +1,142 @@
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+v
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
+import pandas
+dfs = pandas.read_html(“http://rate.bot.com.tw/xrt?Lang=zh-TW")
+currency = dfs[0]
+currency = currency.ix[:,0:5]
+currency.columns = [u’type’,u’buy’,u’sell’,u’buy’,u’sell’]
+currency[u’type’] = currency[u’type’].str.extract(‘\((\w+)\)’)
+currency.to_excel(‘currency.xlsx’)
